@@ -42,7 +42,7 @@ public class crusherContainer extends Container {
     {
         super.addCraftingToCrafters(p_75132_1_);
         p_75132_1_.sendProgressBarUpdate(this, 0, this.tile.furnaceCookTime);
-        p_75132_1_.sendProgressBarUpdate(this, 1, this.tile.furnaceBurnTime);
+        p_75132_1_.sendProgressBarUpdate(this, 1, this.tile.currentTorque);
         p_75132_1_.sendProgressBarUpdate(this, 2, this.tile.currentItemBurnTime);
     }
 
@@ -59,9 +59,9 @@ public class crusherContainer extends Container {
                 icrafting.sendProgressBarUpdate(this, 0, this.tile.furnaceCookTime);
             }
 
-            if (this.lastBurnTime != this.tile.furnaceBurnTime)
+            if (this.lastBurnTime != this.tile.currentTorque)
             {
-                icrafting.sendProgressBarUpdate(this, 1, this.tile.furnaceBurnTime);
+                icrafting.sendProgressBarUpdate(this, 1, this.tile.currentTorque);
             }
 
             if (this.lastItemBurnTime != this.tile.currentItemBurnTime)
@@ -71,7 +71,7 @@ public class crusherContainer extends Container {
         }
 
         this.lastCookTime = this.tile.furnaceCookTime;
-        this.lastBurnTime = this.tile.furnaceBurnTime;
+        this.lastBurnTime = this.tile.currentTorque;
         this.lastItemBurnTime = this.tile.currentItemBurnTime;
     }
     @Override
@@ -88,7 +88,7 @@ public class crusherContainer extends Container {
 
         if (p_75137_1_ == 1)
         {
-            this.tile.furnaceBurnTime = p_75137_2_;
+            this.tile.currentTorque = p_75137_2_;
         }
 
         if (p_75137_1_ == 2)

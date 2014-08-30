@@ -1,6 +1,7 @@
 package com.github.thelonedevil.gearsautomatonssteam.items;
 
 import com.github.thelonedevil.gearsautomatonssteam.GASMain;
+import com.github.thelonedevil.gearsautomatonssteam.utlitiy.Ref;
 import net.minecraft.item.Item;
 
 /**
@@ -11,6 +12,6 @@ public class crushedOre extends Item {
     public crushedOre(String type){
         this.setCreativeTab(GASMain.Tab3);
         this.setUnlocalizedName("oreCrushed"+type);
-        this.setTextureName("oreCrushed"+type);
+        this.setTextureName(Ref.MODID+":oreCrushed"+type);
     }
 }

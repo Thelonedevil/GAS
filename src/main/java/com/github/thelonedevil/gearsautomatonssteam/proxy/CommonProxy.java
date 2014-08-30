@@ -24,4 +24,8 @@ public class CommonProxy {
     public void registerNetworkStuff() {
         NetworkRegistry.INSTANCE.registerGuiHandler(GASMain.instance, new GUIHandler());
     }
+
+    public void registerItemRenderers(){
+
+    }
 }

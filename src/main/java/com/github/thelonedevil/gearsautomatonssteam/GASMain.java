@@ -1,6 +1,7 @@
 package com.github.thelonedevil.gearsautomatonssteam;
 
-import com.github.thelonedevil.gearsautomatonssteam.handler.BucketHandler;
+import com.github.thelonedevil.gearsautomatonssteam.generation.CustomGenerator;
+
 import com.github.thelonedevil.gearsautomatonssteam.items.MyItems;
 import com.github.thelonedevil.gearsautomatonssteam.tiles.fluid.MyFluids;
 import com.github.thelonedevil.gearsautomatonssteam.tiles.machines.MyMachines;
@@ -13,10 +14,11 @@ import cpw.mods.fml.common.Mod.*;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.MinecraftForge;
+
 
 /**
  * Created by justin on 18/08/2014.
@@ -47,6 +49,7 @@ public class GASMain {
             return Item.getItemFromBlock(Blocks.bedrock);
         }
     };
+    public static CustomGenerator worldgen = new CustomGenerator();
 
     @EventHandler
     public static void onPreInit(FMLPreInitializationEvent event){
@@ -55,10 +58,9 @@ public class GASMain {
         MyMachines.init();
         MyFluids.init();
         MyRecipes.init();
-
-        BucketHandler.INSTANCE.buckets.put(MyFluids.steamBlock, MyFluids.yourBucket);
-        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         proxy.registerTileEntities();
+        proxy.registerItemRenderers();
+        GameRegistry.registerWorldGenerator(worldgen, 9);
         LogHelper.info("Pre-Initialisation Complete");
     }
     @EventHandler

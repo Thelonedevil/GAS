@@ -1,6 +1,7 @@
 package com.github.thelonedevil.gearsautomatonssteam.tiles.machines;
 
 import com.github.thelonedevil.gearsautomatonssteam.GASMain;
+import com.github.thelonedevil.gearsautomatonssteam.items.MyItems;
 import com.github.thelonedevil.gearsautomatonssteam.tiles.machines.entity.CrusherTE;
 import com.github.thelonedevil.gearsautomatonssteam.utlitiy.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -54,7 +55,15 @@ public class Crusher extends BaseMachine{
         if (world.isRemote) {
             return true;
         } else {
-            player.openGui(GASMain.instance, Ref.CRUSHER_GUI_ID, world, x, y, z);
+            if(player.getCurrentEquippedItem().getItem().equals(MyItems.crank)){
+                CrusherTE tile = ((CrusherTE)world.getTileEntity(x,y,z));
+                tile.currentTorque = 10;
+                tile.resetTicker();
+                updateBlockState(true, world, x, y,z);
+            }else{
+                player.openGui(GASMain.instance, Ref.CRUSHER_GUI_ID, world, x, y, z);
+            }
+
             return true;
         }
     }
