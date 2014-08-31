@@ -27,6 +27,7 @@ public class CrusherTE extends TileEntity implements ISidedInventory, ITorquePow
 
     public int currentTorque = 0;
     private int ticker;
+    public boolean cranked = false;
 
 
     /**
@@ -184,13 +185,14 @@ public class CrusherTE extends TileEntity implements ISidedInventory, ITorquePow
 
         if (!this.worldObj.isRemote) {
             if (flag) {
-                if(ticker == 0) {
+                if(cranked &&ticker == 0) {
+                    cranked = false;
                     this.currentTorque = 0;
                 }else {
-                    LogHelper.info("World Time = "+worldObj.getTotalWorldTime());
+                    Crusher.updateBlockState(this.currentTorque > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
                     ticker--;
                 }
-                LogHelper.info("Ticker = "+ ticker);
+
             }
             if (this.currentTorque != 0 || this.stacks[0] != null) {
                 if (this.isBurning() && this.canSmelt()) {

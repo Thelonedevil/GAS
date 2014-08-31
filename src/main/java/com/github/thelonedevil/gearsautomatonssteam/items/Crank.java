@@ -13,5 +13,7 @@ public class Crank extends Item {
         this.setCreativeTab(GASMain.Tab2);
         this.setUnlocalizedName("crank");
         this.setTextureName(Ref.MODID+":crank");
+        this.setMaxDamage(5);
+        this.setMaxStackSize(1);
     }
 }

@@ -53,10 +53,13 @@ public class Crusher extends BaseMachine{
             return true;
         } else {
             if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem().equals(MyItems.crank)){
-                CrusherTE tile = (CrusherTE)world.getTileEntity(x,y,z);
-                tile.currentTorque = 10;
-                tile.resetTicker();
-                updateBlockState(true, world, x, y,z);
+                ((CrusherTE)world.getTileEntity(x,y,z)).currentTorque = 10;
+                ((CrusherTE)world.getTileEntity(x,y,z)).resetTicker();
+                ((CrusherTE)world.getTileEntity(x,y,z)).cranked = true;
+                if(player.getCurrentEquippedItem().getItemDamage() == player.getCurrentEquippedItem().getMaxDamage()-1){
+                    player.destroyCurrentEquippedItem();
+                }else
+                player.setCurrentItemOrArmor(0,new ItemStack(MyItems.crank,1,player.getCurrentEquippedItem().getItemDamage()+1));
             }else{
                 player.openGui(GASMain.instance, Ref.CRUSHER_GUI_ID, world, x, y, z);
             }
