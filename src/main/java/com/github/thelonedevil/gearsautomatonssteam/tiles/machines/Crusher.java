@@ -42,9 +42,6 @@ public class Crusher extends BaseMachine{
         this.active = active;
     }
 
-
-
-
     @Override
     public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
         return new CrusherTE();
@@ -55,8 +52,8 @@ public class Crusher extends BaseMachine{
         if (world.isRemote) {
             return true;
         } else {
-            if(player.getCurrentEquippedItem().getItem().equals(MyItems.crank)){
-                CrusherTE tile = ((CrusherTE)world.getTileEntity(x,y,z));
+            if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem().equals(MyItems.crank)){
+                CrusherTE tile = (CrusherTE)world.getTileEntity(x,y,z);
                 tile.currentTorque = 10;
                 tile.resetTicker();
                 updateBlockState(true, world, x, y,z);

@@ -25,13 +25,10 @@ public class CrusherTE extends TileEntity implements ISidedInventory, ITorquePow
 
     private String name = "Crusher";
 
-    public int currentTorque = 10;
-    private int ticker = 200;
+    public int currentTorque = 0;
+    private int ticker;
 
-    /**
-     * The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for
-     */
-    public int currentItemBurnTime = getCurrentTorque();
+
     /**
      * The number of ticks that the current item has been cooking for
      */
@@ -181,7 +178,7 @@ public class CrusherTE extends TileEntity implements ISidedInventory, ITorquePow
     }
 
     public void updateEntity() {
-        boolean flag = this.currentTorque > 0;
+        boolean flag = isBurning();
         boolean flag1 = false;
 
 
@@ -189,7 +186,10 @@ public class CrusherTE extends TileEntity implements ISidedInventory, ITorquePow
             if (flag) {
                 if(ticker == 0) {
                     this.currentTorque = 0;
-                }else --ticker;
+                }else {
+                    LogHelper.info("World Time = "+worldObj.getTotalWorldTime());
+                    ticker--;
+                }
                 LogHelper.info("Ticker = "+ ticker);
             }
             if (this.currentTorque != 0 || this.stacks[0] != null) {
@@ -205,7 +205,7 @@ public class CrusherTE extends TileEntity implements ISidedInventory, ITorquePow
                 }
             }
 
-            if (flag != this.currentTorque > 0) {
+            if (flag != isBurning()) {
                 flag1 = true;
                 Crusher.updateBlockState(this.currentTorque > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
             }
@@ -269,7 +269,6 @@ public class CrusherTE extends TileEntity implements ISidedInventory, ITorquePow
 
         this.currentTorque = p_145839_1_.getShort("Torque");
         this.furnaceCookTime = p_145839_1_.getShort("CookTime");
-        this.currentItemBurnTime = getCurrentTorque();
 
         if (p_145839_1_.hasKey("CustomName", 8)) {
             this.name = p_145839_1_.getString("CustomName");

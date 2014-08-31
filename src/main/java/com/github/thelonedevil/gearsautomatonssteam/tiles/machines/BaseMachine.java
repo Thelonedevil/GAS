@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 /**
  * Created by justin on 18/08/2014.
  */
-public abstract class BaseMachine extends BlockContainer implements ITileEntityProvider {
+public abstract class BaseMachine extends Block implements ITileEntityProvider {
 
    public BaseMachine(){
         super(Material.iron);

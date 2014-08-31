@@ -43,7 +43,6 @@ public class crusherContainer extends Container {
         super.addCraftingToCrafters(p_75132_1_);
         p_75132_1_.sendProgressBarUpdate(this, 0, this.tile.furnaceCookTime);
         p_75132_1_.sendProgressBarUpdate(this, 1, this.tile.currentTorque);
-        p_75132_1_.sendProgressBarUpdate(this, 2, this.tile.currentItemBurnTime);
     }
 
     public void detectAndSendChanges()
@@ -63,16 +62,10 @@ public class crusherContainer extends Container {
             {
                 icrafting.sendProgressBarUpdate(this, 1, this.tile.currentTorque);
             }
-
-            if (this.lastItemBurnTime != this.tile.currentItemBurnTime)
-            {
-                icrafting.sendProgressBarUpdate(this, 2, this.tile.currentItemBurnTime);
-            }
         }
 
         this.lastCookTime = this.tile.furnaceCookTime;
         this.lastBurnTime = this.tile.currentTorque;
-        this.lastItemBurnTime = this.tile.currentItemBurnTime;
     }
     @Override
     public boolean canInteractWith(EntityPlayer p_75145_1_) {
@@ -89,11 +82,6 @@ public class crusherContainer extends Container {
         if (p_75137_1_ == 1)
         {
             this.tile.currentTorque = p_75137_2_;
-        }
-
-        if (p_75137_1_ == 2)
-        {
-            this.tile.currentItemBurnTime = p_75137_2_;
         }
     }
 
